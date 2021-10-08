@@ -43,7 +43,8 @@ def donate_direct_task(payload):
             "user": {
                 "user_name": user_detail["user_full_name"] or '',
                 "user_avatar": user_detail["user_avatar"] or '',
-            }
+            },
+            "message": payload["note"],
         },
         "users": []
     }
