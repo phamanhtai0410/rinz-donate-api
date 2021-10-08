@@ -12,8 +12,7 @@ from ..utils import call_payment_gw_api, get_redis_cache
 
 @celery.task(name='donate_direct_task', rate_limit='60/s')
 def donate_direct_task(payload):
-
-    user_detail = get_redis_cache("users:id:".format(payload["user_id"]))
+    user_detail = get_redis_cache("users:id:{}".format(payload["user_id"]))
     if not user_detail:
         return None
 
@@ -30,5 +29,7 @@ def donate_direct_task(payload):
         "receiver": payload["receiver"],
         "note": payload["note"]
     }
+
+    print(data)
     result = call_payment_gw_api('/v1/payment/loyalty/donate', data)
     return result

@@ -11,7 +11,7 @@ services:
       - ./:/webapps/rinz-service
       - /var/log/apps/:/var/log/apps/
     ports:
-      - 5003:5005
+      - 5004:5005
     #env_file:
     # - ./local.env
     networks:
