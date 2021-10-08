@@ -35,3 +35,5 @@ class DefaultConfig(BaseConfig):
 
     IAPI_DOMAIN = os.getenv('IAPI_DOMAIN')
     PAYMENT_GW_DOMAIN = os.getenv('PAYMENT_GW_DOMAIN')
+
+    SOCKET_API = os.getenv('SOCKET_API')

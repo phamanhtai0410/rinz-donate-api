@@ -397,7 +397,49 @@ def call_payment_gw_api(uri, payload, method='POST'):
                                     timeout=10,
                                     verify=False)
         else:
-            response = requests.request(method="GET", url=DefaultConfig.SERVER_STREAM_DOMAIN + uri,
+            response = requests.request(method="GET", url=DefaultConfig.PAYMENT_GW_DOMAIN + uri,
+                                        headers=headers,
+                                        timeout=10,
+                                        verify=False)
+
+        log_any(uri, response.text)
+
+        return response.json()
+
+    except Exception as e:
+        capture_exception(e)
+        traceback.print_exc()
+
+    return False
+
+
+
+
+def call_socket_api(uri, payload, method='POST'):
+    """
+
+    @:param uri: sample '/api/clients'
+    @:param payload: json
+    @:param method: POST or GET
+    """
+    try:
+        _data = json.dumps(payload)
+        headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            #'Authorization': 'Basic {}'.format(DefaultConfig.SERVER_STREAM_TOKEN),
+        }
+
+        log_any(uri, _data)
+
+        if method in ['POST', 'PUT']:
+            response = requests.request(method=method, url=DefaultConfig.SOCKET_API + uri,
+                                    data=_data,
+                                    headers=headers,
+                                    timeout=10,
+                                    verify=False)
+        else:
+            response = requests.request(method="GET", url=DefaultConfig.SOCKET_API + uri,
                                         headers=headers,
                                         timeout=10,
                                         verify=False)
