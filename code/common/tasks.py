@@ -36,6 +36,7 @@ def donate_direct_task(payload):
     socket_payload = {
         "type": "public",
         "room": payload["stream_id"],
+        "author_id": payload["receiver"],
         "event": "donate",
         "payload": {
             "content": "<span style='color: #FAAD14;'>{}</span> đã donate <span style='color: #FAAD14;'>{} RZP</span><br/>{}".format(user_detail["user_full_name"], payload["amount"], payload["note"]),
